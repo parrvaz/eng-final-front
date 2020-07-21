@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Select, Button, Table, Tag, Space } from "antd";
-
-import SimpleMap from "./map";
-
+import { DownloadOutlined } from "@ant-design/icons";
+import Record from "./record";
 const { Option } = Select;
-
-// {this.state.data.fields.map((item) => {
-//     col.push({
-//       title: item.title,
-//       dataIndex: item.name,
-//       key: item.name,
-//       render: (text) => <a>{text}</a>,
-//     });
-//   })}
 
 const Response = (props) => {
   const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [record, setRecord] = useState({});
   let col = [];
+  let downloadLink =
+    "http://localhost:8000/controlCenter/forms/" +
+    props.match.params.id +
+    "/csv";
+
+  const showRecord = (record) => {
+    setRecord(record);
+    setModalVisible(true);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +33,7 @@ const Response = (props) => {
   return (
     <div>
       {data.fields &&
-        data.fields.map((item) => {
+        data.fields.map((item, index) => {
           col.push({
             title: item.title,
             dataIndex: item.name,
@@ -46,7 +47,7 @@ const Response = (props) => {
 
                       return (
                         <Tag color={color} key={tag}>
-                          {tag.toUpperCase()}
+                          {tag}
                         </Tag>
                       );
                     })
@@ -56,7 +57,32 @@ const Response = (props) => {
           });
         })}
 
-      <Table columns={col} dataSource={data.response} />
+      <Table
+        columns={col}
+        dataSource={data.response}
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: (event) => {
+              showRecord(record);
+            },
+          };
+        }}
+      />
+      <Button
+        type="primary"
+        shape="round"
+        icon={<DownloadOutlined />}
+        size={"large"}
+      >
+        <a href={downloadLink} style={{ color: "#FFF" }}>
+          Download
+        </a>
+      </Button>
+      <Record
+        visible={modalVisible}
+        cancle={(key) => setModalVisible(key)}
+        data={record}
+      />
     </div>
   );
 };
