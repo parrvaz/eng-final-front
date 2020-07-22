@@ -41,17 +41,19 @@ const Response = (props) => {
 
             render: (tags) => (
               <>
-                {typeof tags == "object"
-                  ? tags.map((tag) => {
-                      let color = tags.length % 2 == 1 ? "green" : "red";
+                {tags != null
+                  ? typeof tags == "object"
+                    ? tags.map((tag) => {
+                        let color = tags.length % 2 == 1 ? "green" : "red";
 
-                      return (
-                        <Tag color={color} key={tag}>
-                          {tag}
-                        </Tag>
-                      );
-                    })
-                  : tags}
+                        return (
+                          <Tag color={color} key={tag}>
+                            {tag}
+                          </Tag>
+                        );
+                      })
+                    : tags
+                  : null}
               </>
             ),
           });
