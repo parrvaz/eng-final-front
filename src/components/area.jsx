@@ -4,7 +4,7 @@ import { Button, Table, Tag } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import Record from "./record";
 
-const Response = (props) => {
+const Area = (props) => {
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [record, setRecord] = useState({});
@@ -27,7 +27,7 @@ const Response = (props) => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        "http://localhost:8000/controlCenter/forms/" + props.match.params.id
+        `http://localhost:8000/controlCenter/forms/${props.match.params.id}/${props.match.params.area}`
       );
       setData(data);
     }
@@ -37,7 +37,7 @@ const Response = (props) => {
   return (
     <div>
       {data.fields &&
-        data.fields.map((item, index) => {
+        data.fields.map((item) => {
           col.push({
             title: item.title,
             dataIndex: item.name,
@@ -97,4 +97,4 @@ const Response = (props) => {
   );
 };
 
-export default Response;
+export default Area;

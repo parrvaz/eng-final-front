@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Forms from "./components/forms";
 import FormDetails from "./components/formDetails";
 import Response from "./components/response";
+import Area from "./components/area";
 import FormsCC from "./components/formsCC";
 
 import "./App.css";
@@ -15,6 +16,7 @@ class App extends Component {
       <div>
         <div className="content">
           <Switch>
+            <Route path="/controlCenter/forms/:id/:area" component={Area} />
             <Route path="/fieldAgent/forms/:id" component={FormDetails} />
             <Route
               path="/fieldAgent/forms"
