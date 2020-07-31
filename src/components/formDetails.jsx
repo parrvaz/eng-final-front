@@ -13,7 +13,8 @@ const FormDetails = (props) => {
 
   const handleSave = () => {
     axios.put(
-      "http://localhost:8000/fieldAgent/forms/" + props.match.params.id,
+      "https://eng-final-back.herokuapp.com/fieldAgent/forms/" +
+        props.match.params.id,
       result
     );
     props.history.push("/fieldAgent/forms");
@@ -22,7 +23,8 @@ const FormDetails = (props) => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        "http://localhost:8000/fieldAgent/forms/" + props.match.params.id
+        "https://eng-final-back.herokuapp.com/fieldAgent/forms/" +
+          props.match.params.id
       );
       setData(data);
     }

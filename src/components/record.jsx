@@ -9,7 +9,7 @@ class Record extends React.Component {
 
   onArea = async (id) => {
     const { data: newRecords } = await axios.get(
-      `http://localhost:8000/controlCenter/forms/${this.props.formId}/${id}`
+      `https://eng-final-back.herokuapp.com/controlCenter/forms/${this.props.formId}/${id}`
     );
     this.props.records(newRecords);
   };

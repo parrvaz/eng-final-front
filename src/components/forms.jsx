@@ -9,7 +9,9 @@ class Forms extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await axios.get("http://localhost:8000/fieldAgent/forms/");
+    const { data } = await axios.get(
+      "https://eng-final-back.herokuapp.com/fieldAgent/forms/"
+    );
     this.setState({ data });
   }
 

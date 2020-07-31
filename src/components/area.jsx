@@ -10,7 +10,7 @@ const Area = (props) => {
   const [record, setRecord] = useState({});
   let col = [];
   let downloadLink =
-    "http://localhost:8000/controlCenter/forms/" +
+    "https://eng-final-back.herokuapp.com/controlCenter/forms/" +
     props.match.params.id +
     "/csv";
 
@@ -27,7 +27,7 @@ const Area = (props) => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        `http://localhost:8000/controlCenter/forms/${props.match.params.id}/${props.match.params.area}`
+        `https://eng-final-back.herokuapp.com/controlCenter/forms/${props.match.params.id}/${props.match.params.area}`
       );
       setData(data);
     }

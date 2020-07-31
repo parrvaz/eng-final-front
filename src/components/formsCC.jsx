@@ -10,7 +10,7 @@ class FormsCC extends Component {
 
   async componentDidMount() {
     const { data } = await axios.get(
-      "http://localhost:8000/controlCenter/forms/"
+      "https://eng-final-back.herokuapp.com/controlCenter/forms/"
     );
     this.setState({ data });
   }

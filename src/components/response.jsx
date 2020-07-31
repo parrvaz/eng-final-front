@@ -10,7 +10,7 @@ const Response = (props) => {
   const [record, setRecord] = useState({});
   let col = [];
   let downloadLink =
-    "http://localhost:8000/controlCenter/forms/" +
+    "https://eng-final-back.herokuapp.com/controlCenter/forms/" +
     props.match.params.id +
     "/csv";
 
@@ -20,14 +20,11 @@ const Response = (props) => {
     setModalVisible(true);
   };
 
-  const onTag = (tag) => {
-    console.log(tag);
-  };
-
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        "http://localhost:8000/controlCenter/forms/" + props.match.params.id
+        "https://eng-final-back.herokuapp.com/controlCenter/forms/" +
+          props.match.params.id
       );
       setData(data);
     }
@@ -68,9 +65,6 @@ const Response = (props) => {
         dataSource={data.response}
         onRow={(record, rowIndex) => {
           return {
-            onContextMenu: (event) => {
-              onTag(record.area);
-            },
             onClick: (event) => {
               showRecord(record);
             },
